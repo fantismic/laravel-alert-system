@@ -10,8 +10,12 @@ class AlertSystemServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'alert-system');
 
-        // ✅ ADD THIS BLOCK:
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/alert-system'),
+        ], 'alert-system-views');
+
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'alert-system-migrations');

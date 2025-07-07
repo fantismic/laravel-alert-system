@@ -22,10 +22,18 @@ class ErrorAlertNotification extends Notification
 
     public function toMail($notifiable)
     {
+        $typeSlug = strtolower(str_replace(' ', '_', $this->type));
+        $view = view()->exists("alert-system::mail.error_alerts.{$typeSlug}")
+            ? "alert-system::mail.error_alerts.{$typeSlug}"
+            : "alert-system::mail.error_alerts.default";
+
         return (new MailMessage)
             ->subject("{$this->type} Error Alert")
-            ->line($this->message)
-            ->line(json_encode($this->details));
+            ->view($view, [
+                'type' => $this->type,
+                'message' => $this->message,
+                'details' => $this->details,
+            ]);
     }
 
     public function toTelegram($notifiable)
