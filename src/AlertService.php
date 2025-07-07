@@ -11,10 +11,6 @@ class AlertService
     public function send(string $type, string $message, array $details = [], string $subject = null)
     {
 
-        if ($subject) {
-            $details['_custom_subject'] = $subject;
-        }
-
         $recipients = AlertRecipient::with('type', 'channel')
             ->whereHas('type', fn($q) => $q->where('name', $type))
             ->get();
@@ -39,7 +35,7 @@ class AlertService
             };
 
             $notifiable->notify(
-                new ErrorAlertNotification($type, $message, $details, $recipient->channel->name)
+                new ErrorAlertNotification($type, $message, $details, $recipient->channel->name, $subject)
             );
         }
     }

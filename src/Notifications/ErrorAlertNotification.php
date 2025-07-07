@@ -12,7 +12,8 @@ class ErrorAlertNotification extends Notification
         public string $type,
         public string $message,
         public array $details = [],
-        public string $channel = 'mail'
+        public string $channel = 'mail',
+        public string $subject
     ) {}
 
     public function via($notifiable)
@@ -27,9 +28,7 @@ class ErrorAlertNotification extends Notification
             ? "alert-system::mail.error_alerts.{$typeSlug}"
             : "alert-system::mail.error_alerts.default";
 
-        $customSubject = $this->details['_custom_subject'] ?? null;
-        $subject = $customSubject ?? "{$this->type} Error Alert";
-        unset($this->details['_custom_subject']);
+        $subject = $this->subject ?? "{$this->type} Error Alert";
 
         return (new MailMessage)
             ->subject($subject)
