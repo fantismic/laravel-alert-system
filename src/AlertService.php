@@ -8,8 +8,13 @@ use Illuminate\Notifications\Notifiable;
 
 class AlertService
 {
-    public function send(string $type, string $message, array $details = [])
+    public function send(string $type, string $message, array $details = [], string $subject = null)
     {
+
+        if ($subject) {
+            $details['_custom_subject'] = $subject;
+        }
+
         $recipients = AlertRecipient::with('type', 'channel')
             ->whereHas('type', fn($q) => $q->where('name', $type))
             ->get();
