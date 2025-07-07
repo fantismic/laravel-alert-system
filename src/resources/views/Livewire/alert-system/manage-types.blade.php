@@ -1,5 +1,5 @@
 <div class="p-6">
-    <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Manage Alert Types</h2>
+    <h2 class="text-3xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Manage Alert Types</h2>
 
     <form wire:submit.prevent="save" class="space-y-4 mb-6">
         <div>

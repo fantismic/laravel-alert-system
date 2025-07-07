@@ -1,13 +1,13 @@
-<section class="text-gray-900 dark:text-gray-100">
+<section class="text-gray-900 dark:text-gray-100 p-6">
 <div>
-    <h1 class="text-2xl font-bold mb-4">Recent Alerts</h1>
+    <h1 class="text-3xl font-bold mb-4">Recent Alerts</h1>
 
     <div class="flex flex-wrap gap-4 mb-4">
         <input type="text" wire:model.live="search" placeholder="Search type..."
             class="p-2 border rounded bg-white dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100">
 
         <select
-            class="appearance-none pr-8 bg-no-repeat bg-right bg-[url('data:image/svg+xml;utf8,<svg fill=\'%23999\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>')] ..."
+            class="appearance-none pr-8 bg-no-repeat bg-right dark:bg-gray-800 dark:text-white bg-[url('data:image/svg+xml;utf8,<svg fill=\'%23999\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>')] ..."
         >
             <option value="">All Statuses</option>
             <option value="success">Success</option>
@@ -15,7 +15,7 @@
         </select>
 
         <select
-            class="appearance-none pr-8 bg-no-repeat bg-right bg-[url('data:image/svg+xml;utf8,<svg fill=\'%23999\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>')] ..."
+            class="appearance-none pr-8 bg-no-repeat bg-right dark:bg-gray-800 dark:text-white bg-[url('data:image/svg+xml;utf8,<svg fill=\'%23999\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>')] ..."
         >
             <option value="">All Types</option>
             @foreach(Fantismic\AlertSystem\Models\AlertLog::select('type')->distinct()->pluck('type') as $alertType)
@@ -24,7 +24,7 @@
         </select>
 
         <select
-            class="appearance-none pr-8 bg-no-repeat bg-right bg-[url('data:image/svg+xml;utf8,<svg fill=\'%23999\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>')] ..."
+            class="appearance-none pr-8 bg-no-repeat bg-right dark:bg-gray-800 dark:text-white bg-[url('data:image/svg+xml;utf8,<svg fill=\'%23999\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>')] ..."
         >
             <option value="">All Channels</option>
             @foreach(\Fantismic\AlertSystem\Models\AlertLog::select('channel')->distinct()->pluck('channel') as $channel)

@@ -1,4 +1,3 @@
-
 # Laravel Alert System
 
 A reusable Laravel package to send alerts via multiple channels (e.g., mail, telegram) based on alert **type** and **channel** combinations — stored in the database for easy admin management.
@@ -10,19 +9,20 @@ A reusable Laravel package to send alerts via multiple channels (e.g., mail, tel
 - Dynamically manage recipients from the database
 - Supports Laravel Notifications and queues
 - Uses a Facade: `Alert::send(...)`
+- Includes an optional dashboard with filters and search
+- Logs each alert sent per recipient and status
 
 ### ✅ Requirements
 
 #### Mandatory
-- [ ] Laravel >= 11
-- [ ] PHP >= 8.1
-- [ ] Database migrations
+- [x] Laravel >= 11
+- [x] PHP >= 8.1
+- [x] Database migrations
 
 #### Optional
-- [ ] [laravel-notification-channels/telegram](https://github.com/laravel-notification-channels/telegram)
-- [ ] Tailwind CSS
-- [ ] Livewire
-
+- [x] [laravel-notification-channels/telegram](https://github.com/laravel-notification-channels/telegram)
+- [x] Tailwind CSS (for UI)
+- [x] Livewire (for UI)
 
 ## 📦 Installation
 
@@ -34,26 +34,20 @@ Publish migrations
 
 ```bash
 php artisan vendor:publish --tag=alert-system-migrations
-```
-
-Run migrations:
-```bash
 php artisan migrate
 ```
 
-If you want to publish the default config:
+Publish configuration:
 
 ```bash
 php artisan vendor:publish --tag=alert-system-config
 ```
 
-> To customize which **Blade layout** the admin UI uses, and define the **environments** where alerts are allowed to be sent (e.g., only in production).
+> You can define:
+> - Which **Blade layout** to use for the Livewire UI
+> - Which **environments** (`envs`) are allowed to send alerts
 
-
-
-
-
-If you want to publish seeders (for initial types/channels):
+Publish seeders (optional):
 
 ```bash
 php artisan vendor:publish --tag=alert-system-seeders
@@ -63,23 +57,21 @@ php artisan db:seed --class=AlertChannelsTableSeeder
 
 ## 📁 Tables
 
-This package creates and manages the following tables:
+This package creates the following tables:
 
 - `alert_types`
 - `alert_channels`
 - `alert_recipients`
+- `alert_logs`
 
 Example:
 
-| Type    | Channel  | Address               |
-|---------|----------|------------------------|
-| System  | mail     | admin@example.com     |
-| System  | telegram | @sysadmin_channel     |
-| User    | telegram | @support_channel      |
+| Type    | Channel  | Address            |
+|---------|----------|--------------------|
+| System  | mail     | admin@example.com  |
+| System  | telegram | @sysadmin_channel  |
 
 ## 🚀 Usage
-
-Anywhere in your app, send an alert using the Facade:
 
 ```php
 use Fantismic\AlertSystem\Facades\Alert;
@@ -93,8 +85,9 @@ Alert::send('System', 'The disk is almost full',
 ```
 
 This will:
-- Look up all recipients matching `type = System`
-- For each channel (`mail`, `telegram`), send a notification
+- Look up all recipients for the given type
+- Send via all associated channels (mail, telegram)
+- Log success/failure per recipient
 
 ## 🧠 Signature
 
@@ -109,46 +102,7 @@ Alert::send(
 
 ## 🛠️ Customization
 
-### Define More Types or Channels
-
-You can insert new values in `alert_types` or `alert_channels`, or seed them via admin UI.
-
-### Add More Recipients
-
-Insert into `alert_recipients` with the corresponding `alert_type_id`, `alert_channel_id`, and `address`.
-
-## 📬 Supported Channels
-
-- Mail: via Laravel `MailMessage`
-- Telegram: via [laravel-notification-channels/telegram](https://github.com/laravel-notification-channels/telegram)
-
-> You must install and configure Telegram notifications if using Telegram:
-
-```bash
-composer require laravel-notification-channels/telegram
-```
-
-When using telegram add to config/services.php
-
-```php
-'telegram-bot-api' => [
-    'token' => env('TELEGRAM_BOT_TOKEN')
-],
-```
-
-And set in your .env
-```yml
-TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN_HERE
-```
-
-
----
-
-## 🛠 Customizing Email Templates
-
-You can fully customize the content of email alerts using Blade views. This supports both a **default view** and **per-alert-type views**.
-
-### 📁 View Structure
+### Email Templates
 
 After publishing the views:
 
@@ -156,69 +110,86 @@ After publishing the views:
 php artisan vendor:publish --tag=alert-system-views
 ```
 
-You’ll find:
+You'll find the default template at:
 
-```plaintext
+```
 resources/views/vendor/alert-system/mail/error_alerts/default.blade.php
 ```
 
----
+Use Blade logic to customize per type (e.g., `error_alerts.system.blade.php`).
 
-### 🧱 Option 1: Basic Blade Template
+### Telegram
 
-Use this layout for a simple HTML email:
-
-```blade
-<h1>{{ $type }} Alert</h1>
-<p>{{ $alertMessage }}</p>
-
-@if (!empty($details))
-<ul>
-    @foreach($details as $key => $value)
-        <li><strong>{{ $key }}:</strong> {{ $value }}</li>
-    @endforeach
-</ul>
-@endif
+```bash
+composer require laravel-notification-channels/telegram
 ```
 
-The `alertMessage` and `details` variables are passed into the view from your notification.
+In `config/services.php`:
 
----
+```php
+'telegram-bot-api' => [
+    'token' => env('TELEGRAM_BOT_TOKEN')
+],
+```
 
-### 🔁 Fallback Behavior
+Then in `.env`:
 
-The package tries to load:
+```
+TELEGRAM_BOT_TOKEN=your-token-here
+```
 
-1. `alert-system::mail.error_alerts.{type}` (e.g. `system`, `grc`)
-2. Falls back to: `alert-system::mail.error_alerts.default`
-
-Use lowercase and replace spaces with underscores for type names.
-
----
-
-## 🖥️ Admin UI (Livewire)
-
-This package includes a full Livewire-powered interface to manage alert types, channels, and recipients.
+## 🖥️ Admin UI
 
 ### 📍 Routes
 
-All admin routes are registered under:
-
 | Path                      | Route Name         |
 |---------------------------|--------------------|
+| /admin/alerts/dashboard   | alerts.dashboard   |
 | /admin/alerts/types       | alerts.types       |
 | /admin/alerts/channels    | alerts.channels    |
 | /admin/alerts/recipients  | alerts.recipients  |
 
-These routes use the `web` and `auth` middleware by default. You can customize this in `routes/alert-system.php`.
+Uses `web` and `auth` middleware by default.
 
-### ⚙️ Features
+### 💡 Features
 
-Each UI section includes:
+- Create, edit, delete alert types, channels, and recipients
+- View alert logs in a searchable, filterable table
+- Filter by status (success/failure), type, channel
+- View alert detail in a modal
+- Export alert logs to CSV
+- Dark mode support
 
-- List view with pagination
-- Create/edit forms
-- Delete actions
+## 📊 Logs
+
+Each time an alert is sent, a log is created in the `alert_logs` table.
+
+### 🧾 Columns
+
+| Column         | Description                      |
+|----------------|----------------------------------|
+| id             | Primary key                      |
+| type           | Alert type name                  |
+| channel        | Channel name (mail/telegram)     |
+| address        | Recipient address                |
+| subject        | Subject used                     |
+| message        | Message used                     |
+| details        | JSON-encoded extra details       |
+| status         | `success` or `failure`           |
+| error_message  | Error if status is `failure`     |
+| sent_at        | Timestamp                        |
+| created_at     | Timestamp                        |
+| updated_at     | Timestamp                        |
+
+### 🧱 Model
+
+You can use the model directly for custom dashboards:
+
+```php
+use Fantismic\AlertSystem\Models\AlertLog;
+
+$recent = AlertLog::latest()->take(10)->get();
+```
 
 ## ✅ License
 
