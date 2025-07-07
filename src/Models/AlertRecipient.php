@@ -10,11 +10,11 @@ class AlertRecipient extends Model
 
     public function type()
     {
-        return $this->belongsTo(AlertType::class);
+        return $this->belongsTo(AlertType::class,'alert_type_id');
     }
 
     public function channel()
     {
-        return $this->belongsTo(AlertChannel::class);
+        return $this->belongsTo(AlertChannel::class,'alert_channel_id');
     }
 }

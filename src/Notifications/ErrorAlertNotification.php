@@ -41,9 +41,18 @@ class ErrorAlertNotification extends Notification
             return;
         }
 
+        $chatId = $notifiable->routeNotificationForTelegram();
+
+        if (!$chatId) {
+            return;
+        }
+
         return \NotificationChannels\Telegram\TelegramMessage::create()
-            ->to($notifiable->routeNotificationForTelegram())
+            ->to($chatId)
             ->content("*{$this->type} Error Alert:*\n{$this->message}\n" . json_encode($this->details, JSON_PRETTY_PRINT));
     }
+
+
+
 
 }

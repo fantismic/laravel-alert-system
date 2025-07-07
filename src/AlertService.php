@@ -4,7 +4,7 @@ namespace Fantismic\AlertSystem;
 
 use Fantismic\AlertSystem\Models\AlertRecipient;
 use Fantismic\AlertSystem\Notifications\ErrorAlertNotification;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\Notifiable;
 
 class AlertService
 {
@@ -15,8 +15,23 @@ class AlertService
             ->get();
 
         foreach ($recipients as $recipient) {
-            Notification::route($recipient->channel->name, $recipient->address)
-                ->notify(new ErrorAlertNotification($type, $message, $details));
+            $notifiable = new class($recipient->address, $recipient->channel->name) {
+                use Notifiable;
+
+                public function __construct(public string $address, public string $channel) {}
+
+                public function routeNotificationForTelegram()
+                {
+                    return $this->channel === 'telegram' ? $this->address : null;
+                }
+
+                public function routeNotificationForMail()
+                {
+                    return $this->channel === 'mail' ? $this->address : null;
+                }
+            };
+
+            $notifiable->notify(new ErrorAlertNotification($type, $message, $details));
         }
     }
 }

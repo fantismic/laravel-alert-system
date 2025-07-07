@@ -10,6 +10,6 @@ class AlertType extends Model
 
     public function recipients()
     {
-        return $this->hasMany(AlertRecipient::class, 'alert_type_id');
+        return $this->hasMany(AlertRecipient::class);
     }
 }

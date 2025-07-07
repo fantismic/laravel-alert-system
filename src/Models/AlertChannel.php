@@ -10,6 +10,6 @@ class AlertChannel extends Model
 
     public function recipients()
     {
-        return $this->hasMany(AlertRecipient::class,'alert_channel_id');
+        return $this->hasMany(AlertRecipient::class);
     }
 }
