@@ -72,12 +72,23 @@ use Fantismic\AlertSystem\Facades\Alert;
 Alert::send('System', 'Something went wrong', [
     'error_code' => 500,
     'details' => 'Database not reachable',
+    'subject' => 'Database gonna explode!'
 ]);
 ```
 
 This will:
 - Look up all recipients matching `type = System`
 - For each channel (`mail`, `telegram`), send a notification
+
+## 🧠 Signature
+
+```php
+Alert::send(
+    string $type,
+    string $message,
+    array $details = [],
+    string $subject = null
+): void
 
 ## 🛠️ Customization
 
