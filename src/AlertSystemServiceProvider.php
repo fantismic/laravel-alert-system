@@ -9,8 +9,6 @@ class AlertSystemServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app->booted(function () {
-            if (file_exists(__DIR__.'/../helpers.php')) {
-                require_once __DIR__.'/../helpers.php';
             }
         });
 
@@ -26,8 +24,6 @@ class AlertSystemServiceProvider extends ServiceProvider
             ], 'alert-system-seeders');
         }
 
-        if (file_exists(__DIR__.'/../helpers.php')) {
-            require_once __DIR__.'/../helpers.php';
         }
     
     public function register(): void
