@@ -16,11 +16,27 @@ A reusable Laravel package to send alerts via multiple channels (e.g., mail, tel
 composer require fantismic/alert-system
 ```
 
+Publish migrations
+
+```bash
+php artisan vendor:publish --tag=alert-system-migrations
+```
+
+Run migrations:
+```bash
+php artisan migrate
+```
+
 If you want to publish the default config:
 
 ```bash
 php artisan vendor:publish --tag=alert-system-config
 ```
+
+
+
+
+
 
 If you want to publish seeders (for initial types/channels):
 
