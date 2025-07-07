@@ -1,9 +1,12 @@
 <?php
 
 return [
-    'default_channels' => ['mail', 'telegram'],
-    'default_type' => 'System',
-    'telegram_prefix' => '@',
     'envs' => ["production"],
     'layout' => 'layouts.app',
+    'db-history' => true,
+    'logging' => [
+        'enabled' => true,
+        'channel' => 'daily',
+        'level' => 'info',
+    ]
 ];
