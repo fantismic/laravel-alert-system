@@ -69,11 +69,12 @@ Anywhere in your app, send an alert using the Facade:
 ```php
 use Fantismic\AlertSystem\Facades\Alert;
 
-Alert::send('System', 'Something went wrong', [
-    'error_code' => 500,
-    'details' => 'Database not reachable',
-    'subject' => 'Database gonna explode!'
-]);
+Alert::send('System', 'The disk is almost full', 
+    [
+        'host' => 'web-01',
+        'threshold' => '95%',
+    ], 
+    subject: '🚨 Disk Alert: web-01');
 ```
 
 This will:
