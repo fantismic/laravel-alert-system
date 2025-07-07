@@ -35,7 +35,7 @@ class ErrorAlertNotification extends Notification
             ->subject($subject)
             ->view($view, [
                 'type' => $this->type,
-                'message' => $this->message,
+                'alertMessage' => $this->message,
                 'details' => $this->details,
             ]);
     }
