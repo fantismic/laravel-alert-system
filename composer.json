@@ -1,21 +1,16 @@
 {
-  "name": "fantismic/alert-system",
+  "name": "vendorname/alert-system",
   "description": "Reusable Laravel alerting system",
-  "type": "library",
-  "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Fantismic\\AlertSystem\\": "src/"
+      "VendorName\\AlertSystem\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Fantismic\\AlertSystem\\AlertSystemServiceProvider"
-      ],
-      "aliases": {
-        "Alert": "Fantismic\\AlertSystem\\Facades\\Alert"
-      }
+        "VendorName\\AlertSystem\\AlertSystemServiceProvider"
+      ]
     }
   },
   "require": {
