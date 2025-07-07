@@ -44,6 +44,6 @@ class ManageTypes extends Component
     {
         return view('alert-system::livewire.alert-system.manage-types', [
             'types' => AlertType::paginate(10)
-        ]);
+        ])->layout(config('alert-system.layout'));;
     }
 }

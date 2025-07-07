@@ -180,10 +180,6 @@ Use lowercase and replace spaces with underscores for type names.
 
 ---
 
-## ✅ License
-
-MIT © Fantismic
-
 ## 🖥️ Admin UI (Livewire)
 
 This package includes a full Livewire-powered interface to manage alert types, channels, and recipients.
@@ -222,3 +218,6 @@ And the service provider is loading the routes:
 $this->loadRoutesFrom(__DIR__ . '/../routes/alert-system.php');
 ```
 
+## ✅ License
+
+MIT © Fantismic

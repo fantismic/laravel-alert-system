@@ -44,6 +44,6 @@ class ManageChannels extends Component
     {
         return view('alert-system::livewire.alert-system.manage-channels', [
             'channels' => AlertChannel::paginate(10)
-        ]);
+        ])->layout(config('alert-system.layout'));;
     }
 }

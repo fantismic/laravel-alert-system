@@ -61,6 +61,6 @@ class ManageRecipients extends Component
     {
         return view('alert-system::livewire.alert-system.manage-recipients', [
             'recipients' => AlertRecipient::with('type', 'channel')->paginate(10)
-        ]);
+        ])->layout(config('alert-system.layout'));;
     }
 }

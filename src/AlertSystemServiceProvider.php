@@ -11,6 +11,7 @@ class AlertSystemServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'alert-system');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/alert-system.php');
 
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/alert-system'),
