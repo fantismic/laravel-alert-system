@@ -11,6 +11,10 @@ class AlertService
     public function send(string $type, string $message, array $details = [], string $subject = null)
     {
 
+        if (!in_array(app()->environment(), config('alert-system.envs', []))) {
+            return;
+        }
+
         $recipients = AlertRecipient::with('type', 'channel')
             ->whereHas('type', fn($q) => $q->where('name', $type))
             ->get();

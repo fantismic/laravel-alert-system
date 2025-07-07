@@ -188,11 +188,11 @@ This package includes a full Livewire-powered interface to manage alert types, c
 
 All admin routes are registered under:
 
-```
-/admin/alerts/types
-/admin/alerts/channels
-/admin/alerts/recipients
-```
+| Path                      | Route Name         |
+|---------------------------|--------------------|
+| /admin/alerts/types       | alerts.types       |
+| /admin/alerts/channels    | alerts.channels    |
+| /admin/alerts/recipients  | alerts.recipients  |
 
 These routes use the `web` and `auth` middleware by default. You can customize this in `routes/alert-system.php`.
 
