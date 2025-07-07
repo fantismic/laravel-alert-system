@@ -8,9 +8,6 @@ class AlertSystemServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->app->booted(function () {
-            }
-        });
 
         $this->publishes([
             __DIR__.'/../config/alert-system.php' => config_path('alert-system.php'),
