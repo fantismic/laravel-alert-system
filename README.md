@@ -100,6 +100,19 @@ Insert into `alert_recipients` with the corresponding `alert_type_id`, `alert_ch
 composer require laravel-notification-channels/telegram
 ```
 
+When using telegram add to config/services.php
+
+```php
+'telegram-bot-api' => [
+    'token' => env('TELEGRAM_BOT_TOKEN')
+],
+```
+
+And set in your .env
+```yml
+TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN_HERE
+```
+
 ## ✅ License
 
 MIT © Fantismic

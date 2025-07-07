@@ -16,7 +16,15 @@ class ErrorAlertNotification extends Notification
 
     public function via($notifiable)
     {
-        return ['mail', 'telegram'];
+        $channels = [];
+
+        if (class_exists(\NotificationChannels\Telegram\TelegramMessage::class)) {
+            $channels[] = 'telegram';
+        }
+
+        $channels[] = 'mail';
+
+        return $channels;
     }
 
     public function toMail($notifiable)
@@ -29,9 +37,13 @@ class ErrorAlertNotification extends Notification
 
     public function toTelegram($notifiable)
     {
-        return TelegramMessage::create()
+        if (!class_exists(\NotificationChannels\Telegram\TelegramMessage::class)) {
+            return;
+        }
+
+        return \NotificationChannels\Telegram\TelegramMessage::create()
             ->to($notifiable->routeNotificationForTelegram())
-            ->content("*{$this->type} Error Alert:*
-{$this->message}\n" . json_encode($this->details, JSON_PRETTY_PRINT));
+            ->content("*{$this->type} Error Alert:*\n{$this->message}\n" . json_encode($this->details, JSON_PRETTY_PRINT));
     }
+
 }
