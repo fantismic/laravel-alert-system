@@ -14,6 +14,8 @@ class AlertService
             ->whereHas('type', fn($q) => $q->where('name', $type))
             ->get();
 
+
+
         foreach ($recipients as $recipient) {
             $notifiable = new class($recipient->address, $recipient->channel->name) {
                 use Notifiable;
@@ -31,7 +33,9 @@ class AlertService
                 }
             };
 
-            $notifiable->notify(new ErrorAlertNotification($type, $message, $details));
+            $notifiable->notify(
+                new ErrorAlertNotification($type, $message, $details, $recipient->channel->name)
+            );
         }
     }
 }
