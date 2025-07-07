@@ -183,3 +183,42 @@ Use lowercase and replace spaces with underscores for type names.
 ## ✅ License
 
 MIT © Fantismic
+
+## 🖥️ Admin UI (Livewire)
+
+This package includes a full Livewire-powered interface to manage alert types, channels, and recipients.
+
+### 📍 Routes
+
+All admin routes are registered under:
+
+```
+/admin/alerts/types
+/admin/alerts/channels
+/admin/alerts/recipients
+```
+
+These routes use the `web` and `auth` middleware by default. You can customize this in `routes/alert-system.php`.
+
+### ⚙️ Features
+
+Each UI section includes:
+
+- List view with pagination
+- Create/edit forms
+- Delete actions
+
+### 🧩 Requirements
+
+Make sure your project has Livewire installed:
+
+```bash
+composer require livewire/livewire
+```
+
+And the service provider is loading the routes:
+
+```php
+$this->loadRoutesFrom(__DIR__ . '/../routes/alert-system.php');
+```
+
