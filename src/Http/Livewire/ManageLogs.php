@@ -2,9 +2,10 @@
 
 namespace Fantismic\AlertSystem\Http\Livewire;
 
-use App\Models\AlertLog;
+
 use Livewire\Component;
 use Livewire\WithPagination;
+use Fantismic\AlertSystem\Models\AlertLog;
 
 class ManageLogs extends Component
 {
