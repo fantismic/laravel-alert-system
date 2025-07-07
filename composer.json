@@ -3,13 +3,13 @@
   "description": "Reusable Laravel alerting system",
   "autoload": {
     "psr-4": {
-      "VendorName\\AlertSystem\\": "src/"
+      "Fantismic\\AlertSystem\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "VendorName\\AlertSystem\\AlertSystemServiceProvider"
+        "Fantismic\\AlertSystem\\AlertSystemServiceProvider"
       ]
     }
   },

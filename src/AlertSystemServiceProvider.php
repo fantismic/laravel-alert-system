@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\AlertSystem;
+namespace Fantismic\AlertSystem;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -8,6 +8,12 @@ class AlertSystemServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        $this->app->booted(function () {
+            if (file_exists(__DIR__.'/../helpers.php')) {
+                require_once __DIR__.'/../helpers.php';
+            }
+        });
+
         $this->publishes([
             __DIR__.'/../config/alert-system.php' => config_path('alert-system.php'),
         ], 'alert-system-config');

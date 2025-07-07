@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\AlertSystem\Notifications;
+namespace Fantismic\AlertSystem\Notifications;
 
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;

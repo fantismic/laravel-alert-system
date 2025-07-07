@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use VendorName\AlertSystem\Models\AlertChannel;
+use Fantismic\AlertSystem\Models\AlertChannel;
 
 class AlertChannelsTableSeeder extends Seeder
 {

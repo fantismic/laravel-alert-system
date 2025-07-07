@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\AlertSystem\Models;
+namespace Fantismic\AlertSystem\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

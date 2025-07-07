@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\AlertSystem\Facades;
+namespace Fantismic\AlertSystem\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

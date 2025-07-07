@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use VendorName\AlertSystem\Models\AlertType;
+use Fantismic\AlertSystem\Models\AlertType;
 
 class AlertTypesTableSeeder extends Seeder
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace VendorName\AlertSystem;
+namespace Fantismic\AlertSystem;
 
-use VendorName\AlertSystem\Models\AlertRecipient;
-use VendorName\AlertSystem\Notifications\ErrorAlertNotification;
+use Fantismic\AlertSystem\Models\AlertRecipient;
+use Fantismic\AlertSystem\Notifications\ErrorAlertNotification;
 use Illuminate\Support\Facades\Notification;
 
 class AlertService
