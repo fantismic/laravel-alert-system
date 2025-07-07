@@ -1,0 +1,20 @@
+{
+  "name": "fantismic/alert-system",
+  "description": "Reusable Laravel alerting system",
+  "autoload": {
+    "psr-4": {
+      "Fantismic\\AlertSystem\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Fantismic\\AlertSystem\\AlertSystemServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "illuminate/support": "^11.0"
+  }
+}
