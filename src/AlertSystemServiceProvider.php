@@ -2,7 +2,12 @@
 
 namespace Fantismic\AlertSystem;
 
+use Livewire\Livewire;
 use Illuminate\Support\ServiceProvider;
+use Fantismic\AlertSystem\Http\Livewire\ManageLogs;
+use Fantismic\AlertSystem\Http\Livewire\ManageTypes;
+use Fantismic\AlertSystem\Http\Livewire\ManageChannels;
+use Fantismic\AlertSystem\Http\Livewire\ManageRecipients;
 
 class AlertSystemServiceProvider extends ServiceProvider
 {
@@ -28,6 +33,11 @@ class AlertSystemServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/seeders' => database_path('seeders'),
         ], 'alert-system-seeders');
+
+        Livewire::component('alert-system.manage-types', ManageTypes::class);
+        Livewire::component('alert-system.manage-recipients', ManageRecipients::class);
+        Livewire::component('alert-system.manage-channels', ManageChannels::class);
+        Livewire::component('alert-system.manage-logs', ManageLogs::class);
     }
     
     public function register(): void
