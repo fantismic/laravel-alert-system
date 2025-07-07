@@ -11,6 +11,19 @@ A reusable Laravel package to send alerts via multiple channels (e.g., mail, tel
 - Supports Laravel Notifications and queues
 - Uses a Facade: `Alert::send(...)`
 
+### ✅ Requirements
+
+#### Mandatory
+- [ ] Laravel >= 11
+- [ ] PHP >= 8.1
+- [ ] Database migrations
+
+#### Optional
+- [ ] [laravel-notification-channels/telegram](https://github.com/laravel-notification-channels/telegram)
+- [ ] Tailwind CSS
+- [ ] Livewire
+
+
 ## 📦 Installation
 
 ```bash
@@ -33,6 +46,8 @@ If you want to publish the default config:
 ```bash
 php artisan vendor:publish --tag=alert-system-config
 ```
+
+> To customize which **Blade layout** the admin UI uses, and define the **environments** where alerts are allowed to be sent (e.g., only in production).
 
 
 
@@ -90,6 +105,7 @@ Alert::send(
     array $details = [],
     string $subject = null
 ): void
+```
 
 ## 🛠️ Customization
 
@@ -203,20 +219,6 @@ Each UI section includes:
 - List view with pagination
 - Create/edit forms
 - Delete actions
-
-### 🧩 Requirements
-
-Make sure your project has Livewire installed:
-
-```bash
-composer require livewire/livewire
-```
-
-And the service provider is loading the routes:
-
-```php
-$this->loadRoutesFrom(__DIR__ . '/../routes/alert-system.php');
-```
 
 ## ✅ License
 
