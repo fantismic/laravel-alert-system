@@ -1,14 +1,12 @@
-@component('mail::message')
-# {{ $type }} Alert
+<h1>{{ $type }} Alert</h1>
 
-{{ $message }}
+<p>{{ $alertMessage }}</p>
 
-@isset($details)
-@component('mail::panel')
-<pre>{{ json_encode($details, JSON_PRETTY_PRINT) }}</pre>
-@endcomponent
-@endisset
-
-Thanks,<br>
-{{ config('app.name') }}
-@endcomponent
+@if (!empty($details))
+    <h3>Details</h3>
+    <ul>
+        @foreach($details as $key => $value)
+            <li><strong>{{ $key }}:</strong> {{ $value }}</li>
+        @endforeach
+    </ul>
+@endif

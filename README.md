@@ -1,3 +1,4 @@
+
 # Laravel Alert System
 
 A reusable Laravel package to send alerts via multiple channels (e.g., mail, telegram) based on alert **type** and **channel** combinations — stored in the database for easy admin management.
@@ -32,7 +33,6 @@ If you want to publish the default config:
 ```bash
 php artisan vendor:publish --tag=alert-system-config
 ```
-
 
 
 
@@ -112,6 +112,61 @@ And set in your .env
 ```yml
 TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN_HERE
 ```
+
+
+---
+
+## 🛠 Customizing Email Templates
+
+You can fully customize the content of email alerts using Blade views. This supports both a **default view** and **per-alert-type views**.
+
+### 📁 View Structure
+
+After publishing the views:
+
+```bash
+php artisan vendor:publish --tag=alert-system-views
+```
+
+You’ll find:
+
+```plaintext
+resources/views/vendor/alert-system/mail/error_alerts/default.blade.php
+```
+
+---
+
+### 🧱 Option 1: Basic Blade Template
+
+Use this layout for a simple HTML email:
+
+```blade
+<h1>{{ $type }} Alert</h1>
+<p>{{ $alertMessage }}</p>
+
+@if (!empty($details))
+<ul>
+    @foreach($details as $key => $value)
+        <li><strong>{{ $key }}:</strong> {{ $value }}</li>
+    @endforeach
+</ul>
+@endif
+```
+
+The `alertMessage` and `details` variables are passed into the view from your notification.
+
+---
+
+### 🔁 Fallback Behavior
+
+The package tries to load:
+
+1. `alert-system::mail.error_alerts.{type}` (e.g. `system`, `grc`)
+2. Falls back to: `alert-system::mail.error_alerts.default`
+
+Use lowercase and replace spaces with underscores for type names.
+
+---
 
 ## ✅ License
 
