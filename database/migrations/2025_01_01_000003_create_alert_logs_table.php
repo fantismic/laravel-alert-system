@@ -22,6 +22,6 @@ return new class extends Migration {
     }
 
     public function down(): void {
-        Schema::dropIfExists('alert_recipients');
+        Schema::dropIfExists('alert_logs');
     }
 };
