@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AlertSystemServiceProvider extends ServiceProvider
 {
-    
+
     public function boot(): void
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
@@ -28,11 +28,7 @@ class AlertSystemServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton('alert-system', function ($app) {
-            return new class {
-                public function send(string $type, string $message, array $details = []) {
-                    sendErrorAlert($type, $message, $details);
-                }
-            };
+            return new AlertService();
         });
     }
 
