@@ -49,6 +49,7 @@ php artisan vendor:publish --tag=alert-system-config
 > - Which **environments** (`envs`) are allowed to send alerts
 > - Set **telegram token**
 > - Set **telegram proxy**
+> - Set **global cooldown**
 >
 > You can set as many telegram bots as you like here, or leave only one and use different addresses to different groups for the same bot.
 
@@ -81,12 +82,20 @@ Example:
 ```php
 use Fantismic\AlertSystem\Facades\Alert;
 
-Alert::send('System', 'The disk is almost full', 
-    [
-        'host' => 'web-01',
-        'threshold' => '95%',
-    ], 
-    '🚨 Disk Alert: web-01');
+Alert::send('Healthcheck', '🔥 CPU is on fire');
+```
+
+```php
+use Fantismic\AlertSystem\Facades\Alert;
+
+Alert::send('System', 'The disk is almost full', [
+    'host' => 'web-01',
+    'threshold' => '95%',
+], [
+    'mailSubject' => '🚨 Disk Alert',
+    'cooldown' => 0,
+]);
+
 ```
 
 This will:
@@ -101,7 +110,7 @@ Alert::send(
     string $type,
     string $message,
     array $details = [],
-    string $subject = null
+    array $options = [] // mailSubject, cooldown
 ): void
 ```
 
