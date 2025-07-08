@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AlertRecipient extends Model
 {
-    protected $fillable = ['alert_type_id', 'alert_channel_id', 'address'];
+    protected $fillable = ['alert_type_id', 'alert_channel_id', 'address','is_active', 'bot'];
 
     public function type()
     {

@@ -16,6 +16,7 @@ class AlertLog extends Model
         'details',
         'error_message',
         'sent_at',
+        'bot'
     ];
 
     protected $casts = [
