@@ -34,7 +34,7 @@ class AlertService
                 continue;
             }
 
-            if ($this->isInCooldown($type, $message, $cooldown)) {
+            if ($this->isInCooldown($type, $recipient->channel->name, $message, $cooldown)) {
                 $this->logCooldownSkip($recipient, $type, $message, $details, $subject, $logRecipients, $cooldown);
                 continue;
             }
@@ -68,13 +68,14 @@ class AlertService
         return in_array(app()->environment(), config('alert-system.envs', []));
     }
 
-    protected function isInCooldown(string $type, string $message, int $cooldown): bool
+    protected function isInCooldown(string $type, string $channel, string $message, int $cooldown): bool
     {
         if ($cooldown <= 0) {
             return false;
         }
 
         return AlertLog::where('type', $type)
+            ->where('channel', $channel)
             ->where('message', $message)
             ->where('status', 'success')
             ->where('sent_at', '>=', now()->subMinutes($cooldown))
@@ -102,7 +103,7 @@ class AlertService
         match ($recipient->channel->name) {
             'mail'     => $this->mailAlert($recipient, $type, $message, $details, $subject),
             'telegram' => $this->telegramAlert($recipient, $type, $message, $details, $subject),
-            'discord'  => $this->discordAlert($recipient, $type, $message, $details, $subject),  
+            'discord'  => $this->discordAlert($recipient, $type, $message, $details, $subject),
             default    => throw new \InvalidArgumentException("Unsupported channel: {$recipient->channel->name}")
         };
     }
