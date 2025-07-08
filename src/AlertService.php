@@ -102,6 +102,7 @@ class AlertService
         match ($recipient->channel->name) {
             'mail'     => $this->mailAlert($recipient, $type, $message, $details, $subject),
             'telegram' => $this->telegramAlert($recipient, $type, $message, $details, $subject),
+            'discord'  => $this->discordAlert($recipient, $type, $message, $details, $subject),  
             default    => throw new \InvalidArgumentException("Unsupported channel: {$recipient->channel->name}")
         };
     }

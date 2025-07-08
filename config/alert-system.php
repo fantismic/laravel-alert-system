@@ -12,6 +12,16 @@ return [
         ],
         'default' => 'my_bot',
     ],
+    'discord' => [
+        'bots' => [
+            'my_bot' => [
+                'webhook' => env('DISCORD_ALERTS_WEBHOOK_URL'),
+                'proxy' => env('DISCORD_ALERTS_PROXY', null),
+                'verify' => env('DISCORD_ALERTS_VERIFY', true),
+            ]
+        ],
+        'default' => 'my_bot',
+    ],
     'envs' => ["production"],
     'layout' => 'layouts.app',
     'db-history' => true,
