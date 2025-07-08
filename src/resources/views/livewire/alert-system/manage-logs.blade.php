@@ -39,6 +39,7 @@
             <th class="p-3 font-semibold">Type</th>
             <th class="p-3 font-semibold">Channel</th>
             <th class="p-3 font-semibold">Address</th>
+            <th class="p-3 font-semibold">Bot</th>
             <th class="p-3 font-semibold">Status</th>
             <th class="p-3 font-semibold">Sent At</th>
             <th class="p-3 font-semibold">#</th>
@@ -50,6 +51,7 @@
                 <td class="p-3">{{ $log->type }}</td>
                 <td class="p-3">{{ $log->channel }}</td>
                 <td class="p-3">{{ $log->address }}</td>
+                <td class="p-3">{{ $log->bot ?? '-' }}</td>
                 <td class="p-3">
                     @if ($log->status === 'success')
                         <span class="text-green-400 font-semibold">✔</span>

@@ -49,6 +49,8 @@ php artisan vendor:publish --tag=alert-system-config
 > - Which **environments** (`envs`) are allowed to send alerts
 > - Set **telegram token**
 > - Set **telegram proxy**
+>
+> You can set as many telegram bots as you like here, or leave only one and use different addresses to different groups for the same bot.
 
 Publish seeders (optional):
 
@@ -156,6 +158,7 @@ Each time an alert is sent, a log is created in the `alert_logs` table.
 | type           | Alert type name                  |
 | channel        | Channel name (mail/telegram)     |
 | address        | Recipient address                |
+| bot            | Bot (if applicable)              |
 | subject        | Subject used                     |
 | message        | Message used                     |
 | details        | JSON-encoded extra details       |
