@@ -7,29 +7,13 @@ use GuzzleHttp\Client;
 class TelegramService
 {
     protected Client $client;
-    protected string $token;
 
-    public function __construct()
-    {
-        $this->token = config('alert-system.telegram.token');
-
-        $guzzleConfig = [
-            'base_uri' => "https://api.telegram.org/bot{$this->token}/",
-            'timeout'  => 5.0,
-            'verify'   => false
-        ];
-
-        // Optional proxy support
-        if ($proxy = config('alert-system.telegram.proxy')) {
-            $guzzleConfig['proxy'] = $proxy;
-        }
-
-        $this->client = new Client($guzzleConfig);
-    }
+    public function __construct() {}
 
     public function sendMessage(string $chatId, string $message, string $botKey = 'default'): void
     {
-        $botConfig = config("alert-system.telegram_bots.$botKey", config('alert-system.telegram_bots.default'));
+        $botConfig = config("alert-system.telegram.bots.$botKey", config('alert-system.telegram.bots.default'));
+
         $token = $botConfig['token'];
         $proxy = $botConfig['proxy'] ?? null;
         $verify = $botConfig['verify'] ?? true;
