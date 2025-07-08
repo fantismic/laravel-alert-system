@@ -42,6 +42,8 @@ class AlertSystemServiceProvider extends ServiceProvider
     
     public function register(): void
     {
+        $this->app->singleton(\Fantismic\AlertSystem\Services\TelegramService::class);
+        
         $this->app->singleton('alert-system', function ($app) {
             return new AlertService();
         });
