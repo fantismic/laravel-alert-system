@@ -1,5 +1,7 @@
 # Laravel Alert System
 
+[![Laravel](https://img.shields.io/static/v1?label=laravel&message=%E2%89%A511.0&color=0078BE&logo=laravel&style=flat-square")](https://packagist.org/packages/fantismic/alert-system)[![Version](https://img.shields.io/packagist/v/fantismic/alert-system)](https://packagist.org/packages/fantismic/alert-system)[![Downloads](https://img.shields.io/packagist/dt/fantismic/alert-system)](https://packagist.org/packages/fantismic/alert-system)[![Licence](https://img.shields.io/packagist/l/fantismic/alert-system)](https://packagist.org/packages/fantismic/alert-system)
+
 A reusable Laravel package to send alerts via multiple channels (e.g., mail, telegram) based on alert **type** and **channel** combinations — stored in the database for easy admin management.
 
 ## ✨ Features
@@ -176,3 +178,6 @@ $recent = AlertLog::latest()->take(10)->get();
 ## ✅ License
 
 MIT © Fantismic
+
+---
+[![Image description](https://i.postimg.cc/SxB7b1T0/fantismic-no-background.png)](https://github.com/fantismic)
