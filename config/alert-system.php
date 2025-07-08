@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'cooldown_minutes' => 10,
     'telegram' => [
         'bots' => [
             'my_bot' => [

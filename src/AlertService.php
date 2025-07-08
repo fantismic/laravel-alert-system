@@ -35,6 +35,36 @@ class AlertService
                 return;
             }
 
+            $typeModel = $recipients->first()?->type;
+            $finalCooldown = $cooldownMinutes ?? config('alert-system.cooldown_minutes', 10);
+
+            if ($finalCooldown > 0) {
+                $cooldownTime = now()->subMinutes($finalCooldown);
+
+                $alreadySent = AlertLog::where('type', $type)
+                    ->where('message', $message)
+                    ->where('status', 'success')
+                    ->where('sent_at', '>=', $cooldownTime)
+                    ->exists();
+
+                if ($alreadySent) {
+                    Log::channel(config('alert-system.logging.channel', 'stack'))
+                        ->{config('alert-system.logging.level', 'info')}("[AlertSystem] Skipping alert due to cooldown", [
+                            'cooldown_minutes' => $finalCooldown,
+                            'type' => $type,
+                            'channel' => $recipient->channel->name,
+                            'address' => $recipient->address,
+                            'bot' => $recipient->bot ?? null,
+                            'subject' => $subject ?? "{$type} Alert",
+                            'message' => $message,
+                            'details' => $details,
+                            'recipients' => $logRecipients,
+                            'type' => $type,
+                        ]);
+                    return;
+                }
+            }
+
             $status = 'success';
             $error = null;
 
