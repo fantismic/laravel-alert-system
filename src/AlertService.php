@@ -31,6 +31,10 @@ class AlertService
                 'address' => $recipient->address,
             ];
 
+            if (!$recipient->is_active) {
+                return;
+            }
+
             $status = 'success';
             $error = null;
 
