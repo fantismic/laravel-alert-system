@@ -4,92 +4,50 @@
     <meta charset="UTF-8">
     <title>{{ $type }} Alert</title>
     <style>
-        :root {
-            --bg: #ffffff;
-            --text: #111827;
-            --card-bg: #ffffff;
-            --border: #e5e7eb;
-            --accent: #3b82f6;
-            --details-bg: #f3f4f6;
-            --footer: #6b7280;
-        }
-
         @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #1f2937;
-                --text: #f3f4f6;
-                --card-bg: #374151;
-                --border: #4b5563;
-                --accent: #60a5fa;
-                --details-bg: #4b5563;
-                --footer: #9ca3af;
+            body {
+                background-color: #1f2937 !important;
+                color: #f3f4f6 !important;
             }
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 24px;
-            margin: 0 auto;
-        }
-        .header {
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-        }
-        .header h1 {
-            font-size: 20px;
-            margin: 0;
-            color: var(--text);
-        }
-        .message {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: var(--text);
-        }
-        .details {
-            background: var(--details-bg);
-            border-radius: 6px;
-            padding: 16px;
-            font-family: monospace;
-            font-size: 14px;
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
-        .footer {
-            margin-top: 30px;
-            font-size: 12px;
-            color: var(--footer);
-            text-align: center;
+            .container {
+                background-color: #374151 !important;
+                border-color: #4b5563 !important;
+            }
+            .header {
+                border-bottom-color: #60a5fa !important;
+            }
+            .message, .header h1 {
+                color: #f3f4f6 !important;
+            }
+            .details {
+                background-color: #4b5563 !important;
+                color: #f3f4f6 !important;
+            }
+            .footer {
+                color: #9ca3af !important;
+            }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>{{ $type }} Alert</h1>
+<body style="background-color: #ffffff; color: #111827; padding: 20px;" bgcolor="#ffffff" text="#111827">
+    <div class="container" style="max-width: 600px; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 24px; margin: 0 auto;" bgcolor="#ffffff">
+
+        <div class="header" style="border-bottom: 2px solid #3b82f6; padding-bottom: 8px; margin-bottom: 20px;">
+            <h1 style="font-size: 20px; margin: 0; color: #111827;">{{ $type }} Alert</h1>
         </div>
 
-        <div class="message">
+        <div class="message" style="font-size: 16px; margin-bottom: 20px; color: #111827;">
             {!! nl2br(e($alertMessage)) !!}
         </div>
 
         @if (!empty($details))
-            <div class="details">
+            <div class="details" style="background-color: #f3f4f6; border-radius: 6px; padding: 16px; font-family: monospace; font-size: 14px; white-space: pre-wrap; word-break: break-word; color: #111827;">
 {{ json_encode($details, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}
             </div>
         @endif
 
-        <div class="footer">
-            Sent automatically by the Fantismic Alert System
+        <div class="footer" style="margin-top: 30px; font-size: 12px; color: #6b7280; text-align: center;">
+            System Alert Notification | <a href="{{ config('app.url') }}" style="color: #3b82f6; text-decoration: none;">{{ config('app.name') }}</a>
         </div>
     </div>
 </body>
