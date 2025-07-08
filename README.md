@@ -82,7 +82,7 @@ Alert::send('System', 'The disk is almost full',
         'host' => 'web-01',
         'threshold' => '95%',
     ], 
-    subject: '🚨 Disk Alert: web-01');
+    '🚨 Disk Alert: web-01');
 ```
 
 This will:
