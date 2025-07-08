@@ -20,7 +20,6 @@ A reusable Laravel package to send alerts via multiple channels (e.g., mail, tel
 - [x] Database migrations
 
 #### Optional
-- [x] [laravel-notification-channels/telegram](https://github.com/laravel-notification-channels/telegram)
 - [x] Tailwind CSS (for UI)
 - [x] Livewire (for UI)
 
@@ -46,6 +45,8 @@ php artisan vendor:publish --tag=alert-system-config
 > You can define:
 > - Which **Blade layout** to use for the Livewire UI
 > - Which **environments** (`envs`) are allowed to send alerts
+> - Set **telegram token**
+> - Set **telegram proxy**
 
 Publish seeders (optional):
 
@@ -118,25 +119,6 @@ resources/views/vendor/alert-system/mail/error_alerts/default.blade.php
 
 Use Blade logic to customize per type (e.g., `error_alerts.system.blade.php`).
 
-### Telegram
-
-```bash
-composer require laravel-notification-channels/telegram
-```
-
-In `config/services.php`:
-
-```php
-'telegram-bot-api' => [
-    'token' => env('TELEGRAM_BOT_TOKEN')
-],
-```
-
-Then in `.env`:
-
-```
-TELEGRAM_BOT_TOKEN=your-token-here
-```
 
 ## 🖥️ Admin UI
 
