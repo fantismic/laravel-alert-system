@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>{{ $type }} Alert</title>
     <style>
+        .key {
+            color: #111827 !important; /* black for light mode */
+        }
+        .value {
+            color: #ca4747 !important; /* red for both modes */
+        }
         @media (prefers-color-scheme: dark) {
             body {
                 background-color: #1f2937 !important;
@@ -23,6 +29,12 @@
                 background-color: #4b5563 !important;
                 color: #f3f4f6 !important;
             }
+            .key {
+                color: #f3f4f6 !important; /* white for dark mode */
+            }
+            .value {
+                color: #fca5a5 !important; /* softer red for dark mode */
+            }
             .footer {
                 color: #9ca3af !important;
             }
@@ -41,8 +53,15 @@
         </div>
 
         @if (!empty($details))
-            <div class="details" style="background-color: #f3f4f6; border-radius: 6px; padding: 16px; font-family: monospace; font-size: 14px; white-space: pre-wrap; word-break: break-word; color: #111827;">
-{{ json_encode($details, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}
+            <div class="details" style="background-color: #f3f4f6; border-radius: 6px; padding: 16px; font-family: monospace; font-size: 14px; white-space: normal; word-break: break-word; color: #111827;">
+                <ul style="list-style-type: disc; padding-left: 20px; margin: 0;">
+                    @foreach ($details as $function => $error)
+                        <li style="margin: 6px 0;">
+                            <span class="key">{{ $function }}:</span>
+                            <span class="value">{{ $error }}</span>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         @endif
 
