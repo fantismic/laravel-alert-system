@@ -44,7 +44,8 @@ class AlertService
                         $text .= "<b>{$k}:</b> {$v}\n";
                     }
 
-                    $telegram->sendMessage($recipient->address, $text);
+                    $botKey = $recipient->bot ?? 'default';
+                    $telegram->sendMessage($recipient->address, $text, $botKey);
                 }
 
                 if (config('alert-system.logging.enabled')) {

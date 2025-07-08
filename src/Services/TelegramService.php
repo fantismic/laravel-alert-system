@@ -27,14 +27,26 @@ class TelegramService
         $this->client = new Client($guzzleConfig);
     }
 
-    public function sendMessage(string $chatId, string $message): void
+    public function sendMessage(string $chatId, string $message, string $botKey = 'default'): void
     {
-        $this->client->post('sendMessage', [
-            'form_params' => [
+        $botConfig = config("alert-system.telegram_bots.$botKey", config('alert-system.telegram_bots.default'));
+        $token = $botConfig['token'];
+        $proxy = $botConfig['proxy'] ?? null;
+        $verify = $botConfig['verify'] ?? true;
+
+        $client = new \GuzzleHttp\Client([
+            'base_uri' => "https://api.telegram.org/bot{$token}/",
+            'verify' => $verify,
+            'proxy' => $proxy,
+        ]);
+
+        $client->post('sendMessage', [
+            'json' => [
                 'chat_id' => $chatId,
                 'text' => $message,
                 'parse_mode' => 'HTML',
             ],
         ]);
     }
+
 }
