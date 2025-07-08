@@ -6,10 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('alert_recipients', function (Blueprint $table) {
-            $table->id();
-            $table->string('bot')->nullable()->after('address');;
-            $table->boolean('is_active')->default(true)->after('bot');;
+        Schema::table('alert_recipients', function (Blueprint $table) {
+            $table->string('bot')->nullable()->after('address');
+            $table->boolean('is_active')->default(true)->after('alert_channel_id');
         });
     }
 
