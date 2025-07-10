@@ -25,6 +25,19 @@ A reusable Laravel package to send alerts via multiple channels (e.g., mail, tel
 - [x] Tailwind CSS (for UI)
 - [x] Livewire (for UI)
 
+### Screenshots
+
+#### Mail
+
+##### Light mode
+![Image description](https://i.postimg.cc/y8fwNLzV/System-Alert-Light-Mode.png)
+
+##### Dark mode
+![Image description](https://i.postimg.cc/7YnFFxsJ/System-Alert-Dark-Mode.png)
+
+##### Telegram
+![Image description](https://i.postimg.cc/Vksx13pG/System-Alert-Telegram.png)
+
 ## 📦 Installation
 
 ```bash
