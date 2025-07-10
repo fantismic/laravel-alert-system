@@ -13,7 +13,7 @@ A reusable Laravel package to send alerts via multiple channels (e.g., mail, tel
 - Uses a Facade: `Alert::send(...)`
 - Includes an optional dashboard with filters and search
 - Logs each alert sent per recipient and status
-
+---
 ### ✅ Requirements
 
 #### Mandatory
@@ -24,8 +24,8 @@ A reusable Laravel package to send alerts via multiple channels (e.g., mail, tel
 #### Optional
 - [x] Tailwind CSS (for UI)
 - [x] Livewire (for UI)
-
-### Screenshots
+---
+### 📷 Screenshots
 
 #### Mail
 
@@ -38,6 +38,7 @@ A reusable Laravel package to send alerts via multiple channels (e.g., mail, tel
 ##### Telegram
 ![Image description](https://i.postimg.cc/Vksx13pG/System-Alert-Telegram.png)
 
+---
 ## 📦 Installation
 
 ```bash
@@ -73,7 +74,7 @@ php artisan vendor:publish --tag=alert-system-seeders
 php artisan db:seed --class=AlertTypesTableSeeder
 php artisan db:seed --class=AlertChannelsTableSeeder
 ```
-
+---
 ## 📁 Tables
 
 This package creates the following tables:
@@ -90,6 +91,7 @@ Example:
 | System  | mail     | admin@example.com  |
 | System  | telegram | @sysadmin_channel  |
 
+---
 ## 🚀 Usage
 
 ```php
@@ -116,6 +118,7 @@ This will:
 - Send via all associated channels (mail, telegram)
 - Log success/failure per recipient
 
+---
 ## 🧠 Signature
 
 ```php
@@ -126,7 +129,7 @@ Alert::send(
     array $options = [] // mailSubject, cooldown
 ): void
 ```
-
+---
 ## 🛠️ Customization
 
 ### Email Templates
@@ -145,7 +148,7 @@ resources/views/vendor/alert-system/mail/error_alerts/default.blade.php
 
 Use Blade logic to customize per type (e.g., `error_alerts.system.blade.php`).
 
-
+---
 ## 🖥️ Admin UI
 
 ### 📍 Routes
@@ -159,6 +162,7 @@ Use Blade logic to customize per type (e.g., `error_alerts.system.blade.php`).
 
 Uses `web` and `auth` middleware by default.
 
+---
 ### 💡 Features
 
 - Create, edit, delete alert types, channels, and recipients
@@ -168,6 +172,7 @@ Uses `web` and `auth` middleware by default.
 - Export alert logs to CSV
 - Dark mode support
 
+---
 ## 📊 Logs
 
 Each time an alert is sent, a log is created in the `alert_logs` table.
@@ -190,6 +195,7 @@ Each time an alert is sent, a log is created in the `alert_logs` table.
 | created_at     | Timestamp                        |
 | updated_at     | Timestamp                        |
 
+---
 ### 🧱 Model
 
 You can use the model directly for custom dashboards:
@@ -200,6 +206,7 @@ use Fantismic\AlertSystem\Models\AlertLog;
 $recent = AlertLog::latest()->take(10)->get();
 ```
 
+---
 ## ✅ License
 
 MIT © Fantismic
