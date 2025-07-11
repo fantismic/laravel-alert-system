@@ -7,7 +7,7 @@ A reusable Laravel package to send alerts via multiple channels (e.g., mail, tel
 ## ✨ Features
 
 - Alert types like `System`, `User` (customizable)
-- Channel support: `mail`, `telegram`, `discord` (extensible)
+- Channel support: `mail`, `telegram`, `discord` (more to come)
 - Dynamically manage recipients from the database
 - Supports Laravel Notifications and queues
 - Uses a Facade: `Alert::send(...)`
