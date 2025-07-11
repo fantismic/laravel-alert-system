@@ -1,6 +1,7 @@
 {
-  "name": "vendorname/alert-system",
+  "name": "fantismic/alert-system",
   "description": "Reusable Laravel alerting system",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "Fantismic\\AlertSystem\\": "src/"
