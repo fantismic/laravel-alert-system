@@ -100,6 +100,7 @@ class AlertService
 
     protected function sendAlertViaChannel($recipient, string $type, string $message, array $details, string $subject): void
     {
+        $details = $this->flattenAlertDetails($details);
         match ($recipient->channel->name) {
             'mail'     => $this->mailAlert($recipient, $type, $message, $details, $subject),
             'telegram' => $this->telegramAlert($recipient, $type, $message, $details, $subject),
