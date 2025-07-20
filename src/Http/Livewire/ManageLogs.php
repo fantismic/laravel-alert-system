@@ -6,10 +6,11 @@ namespace Fantismic\AlertSystem\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Fantismic\AlertSystem\Models\AlertLog;
+use Livewire\WithoutUrlPagination;
 
 class ManageLogs extends Component
 {
-    use WithPagination;
+    use WithPagination, WithoutUrlPagination;
 
     public $search = '';
     public $perPage = 10;
