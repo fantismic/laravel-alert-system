@@ -34,7 +34,7 @@ class AlertService
                 continue;
             }
 
-            if ($this->isInCooldown($type, $recipient->channel->name, $message, $cooldown)) {
+            if ($this->isInCooldown($type, $recipient->address, $recipient->channel->name, $message, $cooldown)) {
                 $this->logCooldownSkip($recipient, $type, $message, $details, $subject, $logRecipients, $cooldown);
                 continue;
             }
@@ -68,13 +68,14 @@ class AlertService
         return in_array(app()->environment(), config('alert-system.envs', []));
     }
 
-    protected function isInCooldown(string $type, string $channel, string $message, int $cooldown): bool
+    protected function isInCooldown(string $type, string $address, string $channel, string $message, int $cooldown): bool
     {
         if ($cooldown <= 0) {
             return false;
         }
 
         return AlertLog::where('type', $type)
+            ->where('address',$address)
             ->where('channel', $channel)
             ->where('message', $message)
             ->where('status', 'success')
